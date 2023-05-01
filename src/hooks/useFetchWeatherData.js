@@ -1,8 +1,6 @@
-import React, { useState, useEffect, useContext } from "react";
-import { WeatherContext } from "../components/context/WeatherDataProvider";
+import React, { useState, useEffect } from "react";
 
-export const useFetchWeatherData = () => {
-  const { townInput } = useContext(WeatherContext);
+export const useFetchWeatherData = (townInput) => {
   const [currentWeatherData, setCurrentWeatherData] = useState({
     description: null,
     temp: null,

@@ -1,15 +1,13 @@
 import React, { useContext, useEffect } from "react";
 import thermometerIcon from "../imgs/temp.png";
 import TownSelector from "./TownSelector";
-import { useFetchWeatherData } from "../hooks/useFetchWeatherData";
 import { useState } from "react";
 import { WeatherContext } from "./context/WeatherDataProvider";
 import cloudIcon from "../imgs/4092.png";
 
 const Sidebar = () => {
-  const { townInput } = useContext(WeatherContext);
-  const { temp, temp_min, humidity, speed, description, dt_txt } =
-    useFetchWeatherData();
+  const { townInput, temp, temp_min, humidity, speed, description, dt_txt } =
+    useContext(WeatherContext);
   const [bgMod, setBgMod] = useState("");
   useEffect(() => {
     townInput && setBgMod("info-group-modal");
