@@ -14,6 +14,7 @@ const WeatherDataProvider = ({ children }) => {
     isLoading,
     dt_txt,
     forecastWeatherData,
+    multiDaysWeatherForecast,
   } = useFetchWeatherData(townInput);
   const providerValues = {
     townInput,
@@ -26,6 +27,7 @@ const WeatherDataProvider = ({ children }) => {
     isLoading,
     dt_txt,
     forecastWeatherData,
+    multiDaysWeatherForecast,
   };
 
   return (

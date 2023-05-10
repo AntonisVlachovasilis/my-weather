@@ -1,16 +1,22 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { WeatherContext } from "./context/WeatherDataProvider";
 import Forecast from "./Forecast";
 
 const UpperSection = () => {
-  const { forecastWeatherData } = useContext(WeatherContext);
+  const [titleBg, setTitleBg] = useState("");
+  const [bottom, setBottom] = useState("");
+  const { forecastWeatherData, townInput } = useContext(WeatherContext);
+  useEffect(() => {
+    townInput && setTitleBg("forecastModalBg");
+    townInput && setBottom("separator");
+  }, [townInput]);
   return (
-    <div className="upper-section">
+    <div className={`upper-section ${bottom}`}>
       <div className="heading">
-        <h2>National Weather</h2>
+        <h2 className={`modalsTitle ${titleBg}`}>National Weather</h2>
       </div>
       <div className="info-modal">
-        <h3>Weather Forecast</h3>
+        <h3 className={`modalsTitle ${titleBg}`}>Weather Forecast</h3>
         <div className="forecast-wrapper">
           {forecastWeatherData?.map((elem) => {
             return (
@@ -19,6 +25,7 @@ const UpperSection = () => {
                 temp={elem?.main?.temp}
                 desc={elem?.weather[0]?.description}
                 windSpeed={elem?.wind?.speed}
+                dt_txt={elem?.dt_txt}
               />
             );
           })}

@@ -10,6 +10,7 @@ export const useFetchWeatherData = (townInput) => {
     dt_txt: null,
   });
   const [forecastWeatherData, setForecastWeatherData] = useState([]);
+  const [multiDaysWeatherForecast, setMultiDaysWeatherForecast] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const dataCall = async () => {
@@ -26,6 +27,26 @@ export const useFetchWeatherData = (townInput) => {
             dt_txt,
           } = response.list[0];
 
+          const newData = response.list
+            .reduce((acc, obj) => {
+              const check = acc.some((unObj) => {
+                return unObj.dt_txt.slice(0, 10) === obj.dt_txt.slice(0, 10);
+              });
+              if (!check) {
+                const {
+                  dt_txt,
+                  weather: [{ description }],
+                  main: { temp, temp_min },
+                } = obj;
+                acc.push({ dt_txt, description, temp, temp_min });
+              }
+              return acc;
+            }, [])
+            .slice(1, 5);
+
+          console.log(newData);
+
+          setMultiDaysWeatherForecast(newData);
           setForecastWeatherData(response.list.slice(1, 5));
           setCurrentWeatherData({
             description,
@@ -51,5 +72,6 @@ export const useFetchWeatherData = (townInput) => {
     isLoading,
     dt_txt,
     forecastWeatherData,
+    multiDaysWeatherForecast,
   };
 };

@@ -18,18 +18,18 @@ const Sidebar = () => {
         <img className="temp-icon" src={thermometerIcon} />
         <TownSelector />
       </div>
-      <div className="timestamp">{dt_txt}</div>
-      <div className="weather-description">
+      <div className={`timestamp ${bgMod}`}>{dt_txt}</div>
+      <div className={`weather-description ${bgMod}`}>
         {description && <img src={cloudIcon} className="weather-icon" />}
         {description}
       </div>
       <div className="temp-section">
-        <div className="current-temp">
+        <div className={`current-temp ${bgMod}`}>
           <span className="temp-indicator">{temp && "Temp:"} </span>
           {temp && Math.ceil(eval(temp - 273.15))}{" "}
           {temp && <span className="metrics">&#8451;</span>}
         </div>
-        <div className="min-temp">
+        <div className={`min-temp ${bgMod}`}>
           <span className="temp-indicator">{temp && "min-Temp:"} </span>{" "}
           {temp_min && Math.ceil(eval(temp_min - 273.15))}
           {temp && <span className="metrics">&#8451;</span>}
